@@ -9,11 +9,11 @@ Option Strict On
 Option Explicit On
 
 'TODO
-'[x] Display Bingo 
-'[x] Draw a random ball that has not already been drawn
-'[x] Update display to show all drawn balls
-'[x] Update display to show actual ball number
-'[ ] Refresh tracking with "C" or when all balls have been drawn
+'[x] Display Cards
+'[x] Draw a random card that has not already been drawn
+'[x] Update display to show all drawn cards
+'[ ] Update display to show actual card value
+'[x] Refresh tracking with "C" or when all cards have been drawn
 Module ShuffletheDeck
 
     Dim rand As New Random()
