@@ -3,7 +3,7 @@
 'RCET0265
 'Fall 2025
 'Shuffle The Deck 
-'URL: 
+'URL: https://github.com/horsjaco117/Shuffle-the-Deck
 
 Option Strict On
 Option Explicit On
@@ -14,10 +14,11 @@ Option Explicit On
 '[x] Update display to show all drawn balls
 '[x] Update display to show actual ball number
 '[ ] Refresh tracking with "C" or when all balls have been drawn
-Module Module1
+Module ShuffletheDeck
 
     Dim rand As New Random()
     Dim availableCards As New List(Of Tuple(Of Integer, Integer))
+
     Sub Main()
         Dim userInput As String
         InitializeCards()
@@ -61,14 +62,69 @@ Module Module1
 
     Sub drawCard(Optional clearCount As Boolean = False)
         Dim temp(,) As Boolean = cardTracker(0, 0) 'Create a local copy of ball tracker array
-        'Dim currentBallNumber As Integer
-        'Dim currentBallLetter As Integer
+        Dim cardNumber As Integer
+        Dim cardSuit As Integer
+        Dim _cardNumber As String
+        Dim _cardLetter As String
         Static cardCounter As Integer
+        'Dim _cardTracker As Integer
+        If clearCount Then
+
+            Exit Sub
+
+
+        End If
+
+
+
 
         If clearCount Then
             cardCounter = 0
             InitializeCards()
+            Select Case cardNumber
+                Case 0
+                    _cardNumber = "1"
+                Case 1
+                    _cardNumber = "2"
+                Case 2
+                    _cardNumber = "3"
+                Case 3
+                    _cardNumber = "4"
+                Case 4
+                    _cardNumber = "5"
+                Case 5
+                    _cardNumber = "6"
+                Case 6
+                    _cardNumber = "7"
+                Case 7
+                    _cardNumber = "8"
+                Case 8
+                    _cardNumber = "9"
+                Case 9
+                    _cardNumber = "10"
+                Case 10
+                    _cardNumber = "Jack"
+                Case 11
+                    _cardNumber = "Queen"
+                Case 12
+                    _cardNumber = "King"
+                Case 13
+                    _cardNumber = "Ace"
+            End Select
+
+            Select Case cardSuit
+                Case 0
+                    _cardLetter = "Spades"
+                Case 1
+                    _cardLetter = "Hearts"
+                Case 2
+                    _cardLetter = "Clubs"
+                Case 3
+                    _cardLetter = "Diamonds"
+            End Select
+            Console.Write($"You drew the {_cardNumber} of {_cardLetter}!")
         Else
+
             If availableCards.Count = 0 Then
                 Console.WriteLine("All cards have been drawn!")
                 Console.WriteLine("Enter any key to continue...")
@@ -77,7 +133,6 @@ Module Module1
                 InitializeCards()
                 cardCounter = 0
 
-                Exit Sub
             End If
 
             ' Pick a random ball from the remaining list
@@ -89,9 +144,10 @@ Module Module1
             availableCards.RemoveAt(index)
 
             cardCounter += 1
+
+
+
         End If
-
-
     End Sub
 
 
@@ -148,25 +204,24 @@ Module Module1
     ''' and whether they have been drawn during the current game.
     ''' </summary>
     ''' <param name="cardNumber"></param>
-    ''' <param name="cardLetter"></param>
+    ''' <param name="cardSuit"></param>
     ''' <param name="clear"></param>
     ''' <returns>Current Tracking Array</returns>
 
-    Function cardTracker(cardNumber As Integer, cardLetter As Integer,
+    Function cardTracker(cardNumber As Integer, cardSuit As Integer,
                               Optional update As Boolean = False, Optional clear As Boolean = False) _
                               As Boolean(,)
         Static _cardTracker(14, 4) As Boolean
 
 
         If update Then
-            _cardTracker(cardNumber, cardLetter) = True
+            _cardTracker(cardNumber, cardSuit) = True
         End If
 
         If clear Then
             ReDim _cardTracker(14, 4) 'clears the array. Could also loop through array and set all elements 
         End If
-        'actual code here
-        '_bingoTracker(ballNumber, ballLetter) = True
+
         Return _cardTracker
     End Function
 

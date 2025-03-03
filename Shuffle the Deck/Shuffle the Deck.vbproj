@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{ABF4C725-1BDB-409D-9664-52163A26A434}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>Shuffle_the_Deck.Module1</StartupObject>
+    <StartupObject>Shuffle_the_Deck.ShuffletheDeck</StartupObject>
     <RootNamespace>Shuffle_the_Deck</RootNamespace>
     <AssemblyName>Shuffle the Deck</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -69,7 +69,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Module1.vb" />
+    <Compile Include="ShuffletheDeck.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
