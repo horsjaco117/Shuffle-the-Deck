@@ -25,11 +25,11 @@ Module ShuffletheDeck
 
         Do
             Console.Clear()
-            DisplayBoard()
+            DisplayBoard() 'This controls the board
 
             Console.WriteLine()
             'prompt
-            userInput = Console.ReadLine()
+            userInput = Console.ReadLine() 'Waits for draw clear or quit
             Select Case userInput
                 Case "d"
                     drawCard()
@@ -51,16 +51,16 @@ Module ShuffletheDeck
 
 
 
-    Sub InitializeCards()
+    Sub InitializeCards() 'Startup
         availableCards.Clear()
-        For i = 0 To 14
+        For i = 0 To 14 'Missed class last Thursday and found this
             For j = 0 To 4
                 availableCards.Add(Tuple.Create(i, j)) 'Look up reference for Tuple helped with lag
             Next
         Next
     End Sub
 
-    Sub drawCard(Optional clearCount As Boolean = False)
+    Sub drawCard(Optional clearCount As Boolean = False) 'Tracks all card info
         Dim temp(,) As Boolean = cardTracker(0, 0) 'Create a local copy of ball tracker array
         Dim cardNumber As Integer
         Dim cardSuit As Integer
@@ -81,7 +81,7 @@ Module ShuffletheDeck
         If clearCount Then
             cardCounter = 0
             InitializeCards()
-            Select Case cardNumber
+            Select Case cardNumber 'Attempt at writing which card was drawn below the board 
                 Case 0
                     _cardNumber = "1"
                 Case 1
@@ -125,7 +125,7 @@ Module ShuffletheDeck
             Console.Write($"You drew the {_cardNumber} of {_cardLetter}!")
         Else
 
-            If availableCards.Count = 0 Then
+            If availableCards.Count = 0 Then ' Resets board after all cards are drawn
                 Console.WriteLine("All cards have been drawn!")
                 Console.WriteLine("Enter any key to continue...")
                 Console.ReadLine()
@@ -135,11 +135,11 @@ Module ShuffletheDeck
 
             End If
 
-            ' Pick a random ball from the remaining list
+            'Pick a random ball from the remaining list
             Dim index As Integer = rand.Next(availableCards.Count)
             Dim drawnCard = availableCards(index) 'Adding these two lines prevented the program from acting slow
 
-            ' Mark the ball as drawn
+            'Mark the ball as drawn
             cardTracker(drawnCard.Item1, drawnCard.Item2, True)
             availableCards.RemoveAt(index)
 
@@ -159,11 +159,11 @@ Module ShuffletheDeck
 
         Console.OutputEncoding = System.Text.Encoding.UTF8 'For special characters
         'Dim temp As String = " |"
-        Dim heading() As String = {ChrW(&H2660), ChrW(&H2665), ChrW(&H2663), ChrW(&H2666)}
-        Dim tracker(,) As Boolean = cardTracker(0, 0) '
+        Dim heading() As String = {ChrW(&H2660), ChrW(&H2665), ChrW(&H2663), ChrW(&H2666)} 'Nice Heading
+        Dim tracker(,) As Boolean = cardTracker(0, 0)
         Dim cardColumn() As String = {" ", "2", "3", "4", "5", "6", "7", "8", "9",
                 "10", "J", "Q", "K", "A"}
-        Dim spades As String = ChrW(&H2660)
+        Dim spades As String = ChrW(&H2660) 'Unicode
         Dim hearts As String = ChrW(&H2665)
         Dim clubs As String = ChrW(&H2663)
         Dim diamonds As String = ChrW(&H2666)
@@ -178,7 +178,7 @@ Module ShuffletheDeck
         Next
         Console.WriteLine()
 
-        Console.WriteLine(StrDup(40, "-"))
+        Console.WriteLine(StrDup(40, "-")) 'Lines in table
 
         For currentNumber = 1 To 13
             Console.Write(cardColumn(currentNumber).PadRight(6))
@@ -193,7 +193,7 @@ Module ShuffletheDeck
 
     End Sub
 
-    Function randomNumberBetween(min As Integer, max As Integer) As Integer
+    Function randomNumberBetween(min As Integer, max As Integer) As Integer 'Random Generator
         Dim rand As New Random()
         Return rand.Next(min, max + 1) ' Ensures max is included
     End Function
@@ -208,7 +208,7 @@ Module ShuffletheDeck
     ''' <param name="clear"></param>
     ''' <returns>Current Tracking Array</returns>
 
-    Function cardTracker(cardNumber As Integer, cardSuit As Integer,
+    Function cardTracker(cardNumber As Integer, cardSuit As Integer, ' Another Tracker for the cards
                               Optional update As Boolean = False, Optional clear As Boolean = False) _
                               As Boolean(,)
         Static _cardTracker(14, 4) As Boolean
